@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #app {
-  max-width: 1280px;
+#app {
+  /* max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  font-weight: normal;
-} */
+  font-weight: normal; */
+  /* @apply h-full bg-green-300 flex; */
+}
 
 *,
 *::before,
@@ -21,4 +22,5 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply h-full;
 }
