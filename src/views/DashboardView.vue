@@ -1,6 +1,7 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-  <RouterView />
+  <h1>DASHBOARD WORKS</h1>
 </template>
