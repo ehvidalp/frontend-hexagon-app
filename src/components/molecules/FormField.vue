@@ -3,7 +3,7 @@ import { type PropType } from 'vue';
 import DynamicInput from '../atoms/DynamicInput.vue';
 import DynamicText from '../atoms/DynamicText.vue';
 import type { DynamicInputType } from '@/types/DynamicInput';
-import { DynamicTextType } from '@/types/DynmaicText';
+import { DynamicTextType } from '@/types/DynamicText';
 
 const dynamicTextType = DynamicTextType.LABEL;
 

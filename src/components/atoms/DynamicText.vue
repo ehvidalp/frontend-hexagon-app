@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DynamicTextType } from '@/types/DynmaicText';
+import type { DynamicTextType } from '@/types/DynamicText';
 import { type PropType } from 'vue';
 
 defineProps({

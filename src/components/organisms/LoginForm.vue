@@ -1,9 +1,25 @@
 <script setup lang="ts">
 import FormField from '@/components/molecules/FormField.vue';
 import { DynamicInputType } from '@/types/DynamicInput';
+import { DynamicButtonType } from '@/types/DynamicButton';
 import DynamicButton from '@/components/atoms/DynamicButton.vue';
+import { ref } from 'vue';
+import IconArrow from '../icons/IconArrow.vue';
 
 const dynamicInputType = DynamicInputType
+const dynamicButtonType = DynamicButtonType
+
+const isLoading = ref(false);
+
+const onLogin = () => {
+  console.log('entry here')
+  isLoading.value = true;
+  // Simulate a loading process
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 2000); // 2 seconds
+};
+
 </script>
 
 <template>
@@ -13,15 +29,29 @@ const dynamicInputType = DynamicInputType
       <FormField label="Usuario" label-name="user"></FormField>
       <FormField class="" label="Contraseña" label-name="password" :input-type="dynamicInputType.PASSWORD">
       </FormField>
-      <DynamicButton>
+      <DynamicButton @click="onLogin" :type="dynamicButtonType.SUBMIT" :disabled="isLoading">
         Iniciar sesión
+        <IconArrow class="ml-4" />
 
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-          class="w-4 h-4 inline-block">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
       </DynamicButton>
     </section>
   </div>
 
 </template>
+
+<style scoped lang="css">
+/* Animación personalizada para hacer el spinner más dinámico */
+@keyframes spin-fast {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+.animate-spin-fast {
+  animation: spin-fast 1s linear infinite;
+}
+</style>
