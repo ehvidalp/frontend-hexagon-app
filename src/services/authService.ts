@@ -3,17 +3,6 @@ import type { UserLoginForm, UserLoginResponse } from '@/types/User'
 import { apiClient } from './apiClient'
 import type { AxiosResponse } from 'axios'
 
-// interface LoginData {
-//   email: string
-//   password: string
-// }
-
-// interface User {
-//   id: string
-//   name: string
-//   token: string
-// }
-
 class AuthService {
   async login(userLoginForm: UserLoginForm): Promise<UserLoginResponse> {
     try {
