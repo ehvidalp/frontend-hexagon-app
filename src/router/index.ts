@@ -1,3 +1,4 @@
+import { checkAuth } from '@/utils/auth'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -12,6 +13,7 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('@/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',
@@ -25,6 +27,10 @@ const router = createRouter({
       redirect: { name: 'dashboard-home' },
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  checkAuth(to, next)
 })
 
 export default router

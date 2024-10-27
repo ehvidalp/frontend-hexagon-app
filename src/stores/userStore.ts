@@ -4,21 +4,20 @@ import { defineStore } from 'pinia'
 import { ref, computed, type Ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
+  const token = ref<string | null>(localStorage.getItem('token'))
+  const isAuthenticated = computed(() => !!token.value)
+
   const user: Ref<UserStore | null> = ref(null)
 
   const isLoggedIn = computed(() => Boolean(user.value))
 
   const login = async (email: string, password: string) => {
     try {
-      console.log('in login functions')
       const userData = await authService.login({ email, password })
-      console.log('userData', userData)
-      // user.value = userData;
-      console.log(userData)
-      localStorage.setItem('token', userData.token) // Guardar el token si es necesario
+      localStorage.setItem('token', userData.token)
     } catch (error) {
       console.error('Error during login:', error)
-      throw error // Maneja este error en el componente que llama al login
+      throw error
     }
   }
 
@@ -32,5 +31,6 @@ export const useUserStore = defineStore('user', () => {
     setUser,
     clearUser,
     login,
+    isAuthenticated,
   }
 })

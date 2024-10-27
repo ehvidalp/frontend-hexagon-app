@@ -10,10 +10,11 @@ import { DynamicInputType } from '@/types/DynamicInput';
 import { DynamicButtonType } from '@/types/DynamicButton';
 import type { UserLoginForm } from '@/types/User';
 import { loginValidationSchema } from '@/schemas/formSchemas';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const isLoading = ref(false);
 const router = useRouter();
+const route = useRoute();
 const { login } = useUserStore();
 
 const { handleSubmit, errors } = useForm<UserLoginForm>({
@@ -27,7 +28,9 @@ const onSubmit = handleSubmit(async ({ user, password }: UserLoginForm) => {
   isLoading.value = true;
   try {
     await login(user, password);
-    router.push({ name: 'dashboard' });
+    const redirectPath = route.query.redirect || '/dashboard';
+    router.push(redirectPath as string);
+
   } catch (error) {
     console.error('Error', error);
   } finally {
