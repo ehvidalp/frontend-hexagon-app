@@ -1,39 +1,35 @@
 // src/services/authService.ts
+import type { UserLoginForm, UserLoginResponse } from '@/types/User'
 import { apiClient } from './apiClient'
 import type { AxiosResponse } from 'axios'
 
-interface LoginData {
-  email: string
-  password: string
-}
+// interface LoginData {
+//   email: string
+//   password: string
+// }
 
-interface User {
-  id: string
-  name: string
-  token: string
-}
+// interface User {
+//   id: string
+//   name: string
+//   token: string
+// }
 
 class AuthService {
-  async login(loginData: LoginData): Promise<User> {
+  async login(userLoginForm: UserLoginForm): Promise<UserLoginResponse> {
     try {
-      const { data }: AxiosResponse<User> = await apiClient.post(
+      const { data }: AxiosResponse<UserLoginResponse> = await apiClient.post(
         '/auth/login',
-        loginData,
+        userLoginForm,
       )
       return data ?? null
     } catch (error) {
       console.error('Login failed', error)
-      return { id: '', name: '', token: '' }
+      return {} as UserLoginResponse
     }
   }
 
   async logout(): Promise<void> {
     await apiClient.post('/auth/logout', {})
-  }
-
-  async getCurrentUser(): Promise<User> {
-    const response: AxiosResponse<User> = await apiClient.get('/auth/me')
-    return response.data
   }
 }
 

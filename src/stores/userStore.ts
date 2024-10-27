@@ -1,27 +1,29 @@
 import { authService } from '@/services/authService'
-import type { UserStore } from '@/types/UserStore'
+import type { User, UserLoginForm } from '@/types/User'
+
 import { defineStore } from 'pinia'
 import { ref, computed, type Ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref<string | null>(localStorage.getItem('token'))
+  const user: Ref<User | null> = ref(null)
+
   const isAuthenticated = computed(() => !!token.value)
-
-  const user: Ref<UserStore | null> = ref(null)
-
   const isLoggedIn = computed(() => Boolean(user.value))
+  const userInformation = computed(() => user.value)
 
-  const login = async (email: string, password: string) => {
+  const login = async (userLoginForm: UserLoginForm) => {
     try {
-      const userData = await authService.login({ email, password })
-      localStorage.setItem('token', userData.token)
+      const { token, user } = await authService.login(userLoginForm)
+      setUser(user)
+      localStorage.setItem('token', token)
     } catch (error) {
       console.error('Error during login:', error)
       throw error
     }
   }
 
-  const setUser = (userData: UserStore) => (user.value = userData)
+  const setUser = (userData: User) => (user.value = userData)
 
   const clearUser = () => (user.value = null)
 
@@ -32,5 +34,6 @@ export const useUserStore = defineStore('user', () => {
     clearUser,
     login,
     isAuthenticated,
+    userInformation,
   }
 })

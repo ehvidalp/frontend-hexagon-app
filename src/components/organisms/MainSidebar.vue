@@ -4,11 +4,13 @@ import IconDashboard from '@/components/atoms/icons/IconDashboard.vue';
 import IconProfile from '@/components/atoms/icons/IconProfile.vue';
 import IconCard from '@/components/atoms/icons/IconCard.vue';
 import DynamicButton from '../atoms/DynamicButton.vue';
+import { useUserStore } from '@/stores/userStore';
 
 defineProps({
   isSidebarOpen: Boolean,
 });
-
+const { userInformation } = useUserStore();
+// const { name, lastName, email, image } = userInformation;
 const menuItems = shallowRef([
   { name: 'Dashboard', icon: IconDashboard, route: '/dashboard' },
   { name: 'Cuentas', icon: IconCard, route: '/accounts' },
@@ -24,12 +26,12 @@ const menuItems = shallowRef([
   ]">
     <div class="mt-24">
       <div class="mt-8 text-center">
-        <img src="https://as1.ftcdn.net/v2/jpg/02/43/12/34/1000_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
-          alt="profile picture" class="w-20 h-20 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
+        <img :src="userInformation?.image" alt="profile picture"
+          class="w-20 h-20 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
         <h5 class="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-          {{ 'Name of user' }}
+          {{ userInformation?.name + ' ' + userInformation?.lastName }}
         </h5>
-        <span class="hidden text-gray-400 lg:block">{{ 'mail@mail.com' }}</span>
+        <span class="hidden text-gray-400 lg:block">{{ userInformation?.email }}</span>
       </div>
 
       <ul class="space-y-2 tracking-wide mt-8">

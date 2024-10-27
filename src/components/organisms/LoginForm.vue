@@ -9,7 +9,7 @@ import { ref } from 'vue';
 import { DynamicInputType } from '@/types/DynamicInput';
 import { DynamicButtonType } from '@/types/DynamicButton';
 import type { UserLoginForm } from '@/types/User';
-import { loginValidationSchema } from '@/schemas/formSchemas';
+import { loginValidationSchema } from '@/schemas/loginFormSchemas';
 import { useRoute, useRouter } from 'vue-router';
 
 const isLoading = ref(false);
