@@ -14,7 +14,7 @@ const props = defineProps({
     default: false,
   },
   variant: {
-    type: String as PropType<'default' | 'transparent'>,
+    type: String as PropType<'default' | 'transparent' | 'transparent-active'>,
     required: false,
     default: 'default',
   },
@@ -29,9 +29,12 @@ const handleClick = () => {
 };
 
 const variantClasses = computed(() => {
-  return props.variant === 'default'
-    ? 'bg-blue-500 text-white'
-    : 'bg-transparent text-gray-500';
+  const classes = {
+    default: 'bg-blue-500 text-white',
+    transparent: 'bg-transparent text-gray-500',
+    'transparent-active': 'bg-transparent text-blue-500',
+  }
+  return classes[props.variant];
 });
 
 const hoverClasses = computed(() => {

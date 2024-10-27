@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 import { TypeTransaction, type UserTransaction } from '@/types/User'
 
 const props = defineProps<{

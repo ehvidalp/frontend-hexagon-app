@@ -1,28 +1,32 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue';
-import IconDashboard from '@/components/atoms/icons/IconDashboard.vue';
+import { shallowRef, computed } from 'vue';
 import IconProfile from '@/components/atoms/icons/IconProfile.vue';
 import IconCard from '@/components/atoms/icons/IconCard.vue';
 import DynamicButton from '../atoms/DynamicButton.vue';
 import { useUserStore } from '@/stores/userStore';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 defineProps({
   isSidebarOpen: Boolean,
 });
 const { userInformation } = useUserStore();
 const router = useRouter();
-// const { name, lastName, email, image } = userInformation;
+const route = useRoute();
 const menuItems = shallowRef([
-  { name: 'Dashboard', icon: IconDashboard, route: '/dashboard' },
   { name: 'Cuentas', icon: IconCard, route: 'dashboard-accounts' },
-  { name: 'Perfil', icon: IconProfile, route: 'dashboard-accounts' },
+  { name: 'Perfil', icon: IconProfile, route: 'dashboard-profile' },
 ]);
 
-const onMenuItemClick = (route: string) => {
-  router.push({ name: route });
+const onMenuItemClick = (routeName: string) => {
+  router.push({ name: routeName });
+};
+
+// Computed function to check if the current route matches the item's route
+const getButtonVariant = (itemRoute: string) => {
+  return computed(() => (route.name === itemRoute ? 'transparent-active' : 'transparent'));
 };
 </script>
+
 <template>
   <aside :class="[
     'fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300',
@@ -41,7 +45,7 @@ const onMenuItemClick = (route: string) => {
 
       <ul class="space-y-2 tracking-wide mt-8">
         <li v-for="(item, index) in menuItems" :key="index">
-          <DynamicButton variant="transparent" @click="onMenuItemClick(item.route)">
+          <DynamicButton :variant="getButtonVariant(item.route).value" @click="onMenuItemClick(item.route)">
             <component :is="item.icon" class="h-5 w-5 mr-3" />
             <div class="w-2/5 text-left">
               {{ item.name }}
@@ -50,7 +54,5 @@ const onMenuItemClick = (route: string) => {
         </li>
       </ul>
     </div>
-
-
   </aside>
 </template>

@@ -18,14 +18,6 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'dashboard-home',
-          meta: {
-            title: 'Dashboard',
-          },
-          component: () => import('@/views/DashboardHomeView.vue'),
-        },
-        {
-          path: 'accounts',
           name: 'dashboard-accounts',
           meta: {
             title: 'Cuentas',
@@ -40,11 +32,19 @@ const router = createRouter({
           },
           component: () => import('@/views/DashboardAccountDetailView.vue'),
         },
+        {
+          path: 'profile',
+          name: 'dashboard-profile',
+          meta: {
+            title: 'Perfil',
+          },
+          component: () => import('@/views/DashboardProfileView.vue'),
+        },
       ],
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: { name: 'dashboard-home' },
+      redirect: { name: 'dashboard' },
     },
   ],
 })
