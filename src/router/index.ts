@@ -22,7 +22,7 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: { name: 'dashbaord' },
+      redirect: { name: 'dashboard-home' },
     },
   ],
 })

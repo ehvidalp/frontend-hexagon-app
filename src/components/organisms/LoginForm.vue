@@ -1,50 +1,55 @@
+// src/components/LoginForm.vue
 <script setup lang="ts">
 import FormField from '@/components/molecules/FormField.vue';
-import { DynamicInputType } from '@/types/DynamicInput';
-import { DynamicButtonType } from '@/types/DynamicButton';
 import DynamicButton from '@/components/atoms/DynamicButton.vue';
-import { ref } from 'vue';
 import IconArrow from '@/components/atoms/icons/IconArrow.vue';
 import { useUserStore } from '@/stores/userStore';
-
-const dynamicInputType = DynamicInputType
-const dynamicButtonType = DynamicButtonType
+import { useForm, useField } from 'vee-validate';
+import { ref } from 'vue';
+import { DynamicInputType } from '@/types/DynamicInput';
+import { DynamicButtonType } from '@/types/DynamicButton';
+import type { UserLoginForm } from '@/types/User';
+import { loginValidationSchema } from '@/schemas/formSchemas';
+import { useRouter } from 'vue-router';
 
 const isLoading = ref(false);
+const router = useRouter();
+const { login } = useUserStore();
 
-// const onLogin = () => {
-//   console.log('entry here')
-//   isLoading.value = true;
-//   // Simulate a loading process
-//   setTimeout(() => {
-//     isLoading.value = false;
-//   }, 2000); // 2 seconds
-// };
+const { handleSubmit, errors } = useForm<UserLoginForm>({
+  validationSchema: loginValidationSchema,
+});
 
-const onLogin = async () => {
+const { value: user } = useField<string>('user');
+const { value: password } = useField<string>('password');
+
+const onSubmit = handleSubmit(async ({ user, password }: UserLoginForm) => {
+  isLoading.value = true;
   try {
-    await useUserStore().login('lsdfas', 'passwod');
-    console.log('entry here')
+    await login(user, password);
+    router.push({ name: 'dashboard' });
   } catch (error) {
-    console.log(error);
+    console.error('Error', error);
+  } finally {
+    isLoading.value = false;
   }
-}
+});
 
 </script>
 
 <template>
   <div class="p-10 w-full flex items-center flex-col">
     <h1 class="font-bold text-center text-2xl mb-5">Hexagon Bank</h1>
-    <section class="bg-white shadow w-full rounded-lg  px-5 py-7 md:max-w-md">
-      <FormField label="Usuario" label-name="user"></FormField>
-      <FormField class="" label="Contraseña" label-name="password" :input-type="dynamicInputType.PASSWORD">
-      </FormField>
-      <DynamicButton @click="onLogin" :type="dynamicButtonType.SUBMIT" :disabled="isLoading">
-        Iniciar sesión
-        <IconArrow class="ml-4" />
-
-      </DynamicButton>
+    <section class="bg-white shadow w-full rounded-lg px-5 py-7 md:max-w-md">
+      <form @submit="onSubmit">
+        <FormField v-model="user" :error="errors.user" label="Usuario" label-name="user" />
+        <FormField v-model="password" :error="errors.password" label="Contraseña" label-name="password"
+          :input-type="DynamicInputType.PASSWORD" />
+        <DynamicButton :type="DynamicButtonType.SUBMIT" :disabled="isLoading">
+          Iniciar sesión
+          <IconArrow class="ml-4" />
+        </DynamicButton>
+      </form>
     </section>
   </div>
-
 </template>

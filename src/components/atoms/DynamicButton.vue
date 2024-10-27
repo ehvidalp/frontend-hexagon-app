@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DynamicButtonType } from '@/types/DynamicButton';
-import { defineProps, defineEmits, computed, type PropType } from 'vue';
+import { computed, type PropType } from 'vue';
 
 const props = defineProps({
   type: {

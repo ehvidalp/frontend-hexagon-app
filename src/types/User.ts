@@ -1,5 +1,5 @@
-export interface UserLogin {
-  email: string
+export interface UserLoginForm {
+  user: string
   password: string
 }
 
@@ -8,7 +8,7 @@ export interface UserLoginResponse {
 }
 
 export interface User {
-  id: number
+  user: number
   email: string
   name: string
   lastName: string
