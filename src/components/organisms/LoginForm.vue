@@ -5,20 +5,30 @@ import { DynamicButtonType } from '@/types/DynamicButton';
 import DynamicButton from '@/components/atoms/DynamicButton.vue';
 import { ref } from 'vue';
 import IconArrow from '@/components/atoms/icons/IconArrow.vue';
+import { useUserStore } from '@/stores/userStore';
 
 const dynamicInputType = DynamicInputType
 const dynamicButtonType = DynamicButtonType
 
 const isLoading = ref(false);
 
-const onLogin = () => {
-  console.log('entry here')
-  isLoading.value = true;
-  // Simulate a loading process
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 2000); // 2 seconds
-};
+// const onLogin = () => {
+//   console.log('entry here')
+//   isLoading.value = true;
+//   // Simulate a loading process
+//   setTimeout(() => {
+//     isLoading.value = false;
+//   }, 2000); // 2 seconds
+// };
+
+const onLogin = async () => {
+  try {
+    await useUserStore().login('lsdfas', 'passwod');
+    console.log('entry here')
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 </script>
 
@@ -38,20 +48,3 @@ const onLogin = () => {
   </div>
 
 </template>
-
-<style scoped lang="css">
-/* Animación personalizada para hacer el spinner más dinámico */
-@keyframes spin-fast {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(720deg);
-  }
-}
-
-.animate-spin-fast {
-  animation: spin-fast 1s linear infinite;
-}
-</style>
