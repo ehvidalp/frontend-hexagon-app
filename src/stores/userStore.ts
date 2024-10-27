@@ -1,6 +1,5 @@
 import { authService } from '@/services/authService'
 import type { User, UserLoginForm } from '@/types/User'
-
 import { defineStore } from 'pinia'
 import { ref, computed, type Ref } from 'vue'
 

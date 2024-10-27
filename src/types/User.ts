@@ -17,3 +17,34 @@ export interface User {
   address: string
   phone: string
 }
+
+export interface UserAccounts {
+  type: TypeAccount
+  currentBalance: number
+  openDate: Date
+  name: string
+  paymentBalance?: number
+  transactions?: UserTransactions[]
+}
+
+export interface UserTransactions {
+  type: TypeTransaction
+  amount: number
+  date: Date
+  description: string
+}
+
+export enum TypeTransaction {
+  DEPOSIT = 'DEPOSIT',
+  WITHDRAWAL = 'WITHDRAWAL',
+  TRANSFER = 'TRANSFER',
+  PAYMENT = 'PAYMENT',
+}
+
+export enum TypeAccount {
+  SAVINGS = 'SAVINGS',
+  CHECKING = 'CHECKING',
+  CREDIT = 'CREDIT',
+  INVESTMENT = 'INVESTMENT',
+  LOAN = 'LOAN',
+}

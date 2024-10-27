@@ -8,6 +8,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
+      meta: { requiredGuest: true },
     },
     {
       path: '/dashboard',
@@ -22,6 +23,14 @@ const router = createRouter({
             title: 'Dashboard',
           },
           component: () => import('@/views/DashboardHomeView.vue'),
+        },
+        {
+          path: '/accounts',
+          name: 'dashboard-accounts',
+          meta: {
+            title: 'Cuentas',
+          },
+          component: () => import('@/views/DashboardAccountsView.vue'),
         },
       ],
     },

@@ -5,18 +5,24 @@ import IconProfile from '@/components/atoms/icons/IconProfile.vue';
 import IconCard from '@/components/atoms/icons/IconCard.vue';
 import DynamicButton from '../atoms/DynamicButton.vue';
 import { useUserStore } from '@/stores/userStore';
+import { useRouter } from 'vue-router';
 
 defineProps({
   isSidebarOpen: Boolean,
 });
 const { userInformation } = useUserStore();
+const router = useRouter();
 // const { name, lastName, email, image } = userInformation;
 const menuItems = shallowRef([
   { name: 'Dashboard', icon: IconDashboard, route: '/dashboard' },
-  { name: 'Cuentas', icon: IconCard, route: '/accounts' },
-  { name: 'Perfil', icon: IconProfile, route: '/profile' },
+  { name: 'Cuentas', icon: IconCard, route: 'dashboard-accounts' },
+  { name: 'Perfil', icon: IconProfile, route: 'dashboard-accounts' },
 ]);
 
+const onMenuItemClick = (route: string) => {
+  console.log(route);
+  router.push({ name: route });
+};
 </script>
 <template>
   <aside :class="[
@@ -36,7 +42,7 @@ const menuItems = shallowRef([
 
       <ul class="space-y-2 tracking-wide mt-8">
         <li v-for="(item, index) in menuItems" :key="index">
-          <DynamicButton variant="transparent">
+          <DynamicButton variant="transparent" @click="onMenuItemClick(item.route)">
             <component :is="item.icon" class="h-5 w-5 mr-3" />
             <div class="w-2/5 text-left">
               {{ item.name }}

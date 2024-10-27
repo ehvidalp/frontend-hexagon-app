@@ -11,3 +11,61 @@ export const UserLoginResponse = {
     phone: '4444-8744',
   },
 }
+
+export const UserAccounts = [
+  {
+    type: 'SAVINGS',
+    currentBalance: 1000,
+    openDate: new Date(),
+    name: 'Cuenta de ahorro',
+    transactions: [
+      {
+        type: 'DEPOSIT',
+        amount: 100,
+        date: new Date(),
+        description: 'Depósito de ahorro',
+      },
+      {
+        type: 'WITHDRAWAL',
+        amount: 50,
+        date: new Date(),
+        description: 'Retiro de ahorro',
+      },
+    ],
+  },
+  {
+    type: 'CHECKING',
+    currentBalance: 500,
+    openDate: new Date(),
+    name: 'Cuenta de cheques',
+    transactions: [
+      {
+        type: 'DEPOSIT',
+        amount: 100,
+        date: new Date(),
+        description: 'Depósito de cheque',
+      },
+      {
+        type: 'WITHDRAWAL',
+        amount: 50,
+        date: new Date(),
+        description: 'Retiro de cheque',
+      },
+    ],
+  },
+  {
+    type: 'CREDIT',
+    currentBalance: 1000,
+    openDate: new Date(),
+    name: 'Tarjeta de crédito',
+    paymentBalance: 200,
+    transactions: [
+      {
+        type: 'PAYMENT',
+        amount: 100,
+        date: new Date(),
+        description: 'Pago de tarjeta de crédito',
+      },
+    ],
+  },
+]

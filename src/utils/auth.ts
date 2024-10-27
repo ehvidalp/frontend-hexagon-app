@@ -12,5 +12,9 @@ export function checkAuth(
     return
   }
 
+  if (to.meta.requiresGuest && userStore.isAuthenticated) {
+    next({ name: 'dashboard-home' })
+    return
+  }
   next()
 }

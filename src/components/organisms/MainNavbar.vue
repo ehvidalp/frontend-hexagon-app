@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import IconMenu from '@/components/atoms/icons/IconMenu.vue';
 import UserNotifications from '@/components/organisms/UserNotifications.vue';
-import { useRoute } from 'vue-router';
-
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
+import { ref } from 'vue';
 
 const route = useRoute();
-const pageTitle = route.meta.title;
+const pageTitle = ref(route.meta.title);
 
-const props = defineProps<{
-  isSidebarOpen: boolean;
-}>();
+onBeforeRouteUpdate((to) => {
+  pageTitle.value = to.meta.title;
+});
 
-const emit = defineEmits<{
-  (e: 'toggle-sidebar', value: boolean): void;
-}>();
+const props = defineProps<{ isSidebarOpen: boolean }>();
+const emit = defineEmits<{ (e: 'toggle-sidebar', value: boolean): void }>();
 
 const toggleSidebar = () => {
   emit('toggle-sidebar', !props.isSidebarOpen);
