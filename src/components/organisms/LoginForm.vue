@@ -4,7 +4,7 @@ import { DynamicInputType } from '@/types/DynamicInput';
 import { DynamicButtonType } from '@/types/DynamicButton';
 import DynamicButton from '@/components/atoms/DynamicButton.vue';
 import { ref } from 'vue';
-import IconArrow from '../icons/IconArrow.vue';
+import IconArrow from '@/components/atoms/icons/IconArrow.vue';
 
 const dynamicInputType = DynamicInputType
 const dynamicButtonType = DynamicButtonType
