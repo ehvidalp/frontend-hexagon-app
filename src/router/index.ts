@@ -6,12 +6,19 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue'),
+      component: () => import('@/views/LoginView.vue'),
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/DashboardView.vue'),
+      component: () => import('@/layouts/MainLayout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'dashboard-home',
+          component: () => import('@/views/DashboardHomeView.vue'),
+        },
+      ],
     },
     {
       path: '/:pathMatch(.*)*',
