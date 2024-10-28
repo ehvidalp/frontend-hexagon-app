@@ -20,7 +20,6 @@ const menuItems = shallowRef([
 ]);
 
 const onMenuItemClick = (route: string) => {
-  console.log(route);
   router.push({ name: route });
 };
 </script>

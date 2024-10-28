@@ -38,6 +38,9 @@ export const useUserAccounts = defineStore('userAccounts', () => {
     state.error = ''
   }
 
+  const getAccountById = (id: string): UserAccount | undefined =>
+    userAccounts.value?.find(account => account.id === id)
+
   return {
     userAccounts: listAccounts,
     isLoading: computed(() => state.isLoading),
@@ -45,5 +48,6 @@ export const useUserAccounts = defineStore('userAccounts', () => {
     getUserAccounts,
     setUserAccounts,
     clearUserAccounts,
+    getAccountById,
   }
 })

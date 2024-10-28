@@ -38,7 +38,7 @@ const router = createRouter({
           meta: {
             title: 'Cuenta Asociada',
           },
-          component: () => import('@/views/DashboardAccountView.vue'),
+          component: () => import('@/views/DashboardAccountDetailView.vue'),
         },
       ],
     },
