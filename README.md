@@ -1,20 +1,33 @@
-# frontend-hexagon-app
+# Hexagon Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontend layout of the Hexagon application.
 
-## Recommended IDE Setup
+## Tech Stack
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vite
 
-## Type Support for `.vue` Imports in TS
+- Vue 3
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- TypeScript
 
-## Customize configuration
+- Tailwind CSS
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Pinia
 
-## Project Setup
+- Axios
+
+## Build and Run with Docker
+
+1. Build the Docker Image
+   ```sh
+   docker build -t frontend-hexagon-app .
+   ```
+2. Run the Docker Container
+   ```sh
+   docker run -it -p 3000:3000 frontend-hexagon-app
+   ```
+
+## Project Setup Local
 
 ```sh
 npm install
@@ -42,4 +55,41 @@ npm run test:unit
 
 ```sh
 npm run lint
+```
+
+### Project Structure
+
+```sh
+├── public/                 # Static assets
+├── src/                    # Source files
+│   ├── assets/             # Assets like images, styles, etc.
+│   ├── components/         # Vue components
+│   ├── layouts/            # Vue layouts
+│   ├── mocks/              # Mock data for testing
+│   ├── plugins/            # Vue plugins
+│   ├── router/             # Vue Router setup
+│   ├── schemas/            # Validation schemas
+│   ├── services/           # Services for API calls, etc.
+│   ├── store/              # Vuex store setup
+│   ├── types/              # TypeScript types
+│   ├── utils/              # Utility functions
+│   ├── views/              # Vue views
+│   ├── App.vue             # Main App component
+│   ├── main.ts             # Entry point for the application
+├── tests/                  # Unit tests
+├── .dockerignore           # Docker ignore file
+├── .eslintrc.js            # ESLint configuration
+├── .gitignore              # Git ignore file
+├── Dockerfile              # Docker configuration
+├── index.html              # Main HTML file
+├── nginx.conf              # Nginx configuration
+├── package.json            # Project metadata and dependencies
+├── postcss.config.js       # PostCSS configuration
+├── README.md               # Project documentation
+├── tailwind.config.js      # Tailwind CSS configuration
+├── tsconfig.app.json       # TypeScript configuration for the app
+├── tsconfig.json           # TypeScript base configuration
+├── tsconfig.node.json      # TypeScript configuration for Node.js
+├── tsconfig.vitest.json    # TypeScript configuration for Vitest
+├── vite.config.ts          # Vite configuration
 ```
