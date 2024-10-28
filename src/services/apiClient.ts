@@ -1,5 +1,5 @@
 // src/services/apiClient.ts
-import { UserLoginResponse } from '@/mocks/userMock'
+import { UserAccountsResponse, UserLoginResponse } from '@/mocks/userMock'
 import axios, {
   AxiosError,
   type AxiosInstance,
@@ -47,7 +47,7 @@ class ApiClient {
     this.mock = new MockAdapter(this.client)
 
     this.mock.onPost('/auth/login').reply(200, UserLoginResponse)
-
+    this.mock.onGet('/accounts').reply(200, UserAccountsResponse)
     this.mock.onPost('/auth/logout').reply(400)
   }
 

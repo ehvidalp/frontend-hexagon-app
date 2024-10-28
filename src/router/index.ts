@@ -25,12 +25,20 @@ const router = createRouter({
           component: () => import('@/views/DashboardHomeView.vue'),
         },
         {
-          path: '/accounts',
+          path: 'accounts',
           name: 'dashboard-accounts',
           meta: {
             title: 'Cuentas',
           },
           component: () => import('@/views/DashboardAccountsView.vue'),
+        },
+        {
+          path: 'account-detail/:id',
+          name: 'dashboard-account-detail',
+          meta: {
+            title: 'Cuenta Asociada',
+          },
+          component: () => import('@/views/DashboardAccountView.vue'),
         },
       ],
     },

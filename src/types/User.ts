@@ -18,13 +18,14 @@ export interface User {
   phone: string
 }
 
-export interface UserAccounts {
+export interface UserAccount {
   type: TypeAccount
   currentBalance: number
   openDate: Date
   name: string
   paymentBalance?: number
   transactions?: UserTransactions[]
+  id: string
 }
 
 export interface UserTransactions {
