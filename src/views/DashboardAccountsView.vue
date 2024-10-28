@@ -2,7 +2,7 @@
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import CardAccount from '@/components/organisms/CardAccount.vue';
-import { useUserAccounts } from '@/stores/userAccounts';
+import { useUserAccounts } from '@/stores/userAccountsStore';
 import DynamicText from '@/components/atoms/DynamicText.vue';
 import { DynamicTextType } from '@/types/DynamicText';
 

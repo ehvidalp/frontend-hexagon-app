@@ -24,10 +24,10 @@ const { handleSubmit, errors } = useForm<UserLoginForm>({
 const { value: user } = useField<string>('user');
 const { value: password } = useField<string>('password');
 
-const onSubmit = handleSubmit(async ({ user, password }: UserLoginForm) => {
+const onSubmit = handleSubmit(async (userLoginForm: UserLoginForm) => {
   isLoading.value = true;
   try {
-    await login(user, password);
+    await login(userLoginForm);
     const redirectPath = route.query.redirect || '/dashboard';
     router.push(redirectPath as string);
 

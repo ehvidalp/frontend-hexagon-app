@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import { type UserTransactions, TypeTransaction } from '@/types/User'
+import { TypeTransaction, type UserTransaction } from '@/types/User'
 
 const props = defineProps<{
-  transactions: UserTransactions[]
+  transactions: UserTransaction[]
 }>()
 
 const formattedTransactions = computed(() => {
   return props.transactions.map(transaction => {
-    const isExpense = transaction.type === TypeTransaction.WITHDRAWAL
+    const isExpense = transaction.type === TypeTransaction.WITHDRAWAL || transaction.type === TypeTransaction.OTHER_BANK || transaction.type === TypeTransaction.TRANSFER
     const sign = isExpense ? '-' : '+'
     const amount = `${sign} Q ${transaction.amount.toLocaleString()}`
 

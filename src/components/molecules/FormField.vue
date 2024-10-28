@@ -25,7 +25,7 @@ const props = defineProps({
     default: '',
   },
   modelValue: {
-    type: String,
+    type: [String, Number] as PropType<string | number>,
     default: '',
   },
   error: {

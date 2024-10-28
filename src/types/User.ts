@@ -24,11 +24,12 @@ export interface UserAccount {
   openDate: Date
   name: string
   paymentBalance?: number
-  transactions?: UserTransactions[]
+  transactions?: UserTransaction[]
   id: string
 }
 
-export interface UserTransactions {
+export interface UserTransaction {
+  id: string
   type: TypeTransaction
   amount: number
   date: Date
@@ -40,6 +41,7 @@ export enum TypeTransaction {
   WITHDRAWAL = 'WITHDRAWAL',
   TRANSFER = 'TRANSFER',
   PAYMENT = 'PAYMENT',
+  OTHER_BANK = 'OTHER_BANK',
 }
 
 export enum TypeAccount {
