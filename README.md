@@ -24,7 +24,7 @@ Frontend layout of the Hexagon application.
    ```
 2. Run the Docker Container
    ```sh
-   docker run -it -p 3000:3000 frontend-hexagon-app
+   docker run -it -p 8080:80 frontend-hexagon-app
    ```
 
 ## Project Setup Local
