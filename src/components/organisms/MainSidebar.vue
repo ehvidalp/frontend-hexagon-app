@@ -5,7 +5,7 @@ import IconCard from '@/components/atoms/icons/IconCard.vue';
 import DynamicButton from '../atoms/DynamicButton.vue';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter, useRoute } from 'vue-router';
-import { log } from 'console';
+
 
 defineProps({
   isSidebarOpen: Boolean,
@@ -22,7 +22,6 @@ const onMenuItemClick = (routeName: string) => {
   router.push({ name: routeName });
 };
 
-// Computed function to check if the current route matches the item's route
 const getButtonVariant = (itemRoute: string) => {
   return computed(() => (route.name === itemRoute ? 'transparent-active' : 'transparent'));
 };
