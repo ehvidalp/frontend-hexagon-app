@@ -1,4 +1,3 @@
-// src/components/LoginForm.vue
 <script setup lang="ts">
 import FormField from '@/components/molecules/FormField.vue';
 import DynamicButton from '@/components/atoms/DynamicButton.vue';
@@ -10,12 +9,11 @@ import { DynamicInputType } from '@/types/DynamicInput';
 import { DynamicButtonType } from '@/types/DynamicButton';
 import type { UserLoginForm } from '@/types/User';
 import { loginValidationSchema } from '@/schemas/loginFormSchemas';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const isLoading = ref(false);
 const router = useRouter();
-const route = useRoute();
-const { login } = useUserStore();
+const { login, userInformation } = useUserStore(); // Asegúrate de que el store tenga el estado actualizado del usuario
 
 const { handleSubmit, errors } = useForm<UserLoginForm>({
   validationSchema: loginValidationSchema,
@@ -27,17 +25,17 @@ const { value: password } = useField<string>('password');
 const onSubmit = handleSubmit(async (userLoginForm: UserLoginForm) => {
   isLoading.value = true;
   try {
+    // Realiza el login
     await login(userLoginForm);
-    const redirectPath = route.query.redirect || '/dashboard';
-    router.push(redirectPath as string);
+
+      router.push({ name: 'dashboard-accounts' });
 
   } catch (error) {
-    console.error('Error', error);
+    console.error('Error de login:', error);
   } finally {
     isLoading.value = false;
   }
 });
-
 </script>
 
 <template>

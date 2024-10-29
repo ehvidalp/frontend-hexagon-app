@@ -5,11 +5,12 @@ import IconCard from '@/components/atoms/icons/IconCard.vue';
 import DynamicButton from '../atoms/DynamicButton.vue';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter, useRoute } from 'vue-router';
+import { log } from 'console';
 
 defineProps({
   isSidebarOpen: Boolean,
 });
-const { userInformation } = useUserStore();
+const { userInformation, clearUser } = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const menuItems = shallowRef([
@@ -25,6 +26,12 @@ const onMenuItemClick = (routeName: string) => {
 const getButtonVariant = (itemRoute: string) => {
   return computed(() => (route.name === itemRoute ? 'transparent-active' : 'transparent'));
 };
+
+const logout = () => {
+  clearUser();
+  router.push({ name: 'login' });
+};
+
 </script>
 
 <template>
@@ -50,6 +57,11 @@ const getButtonVariant = (itemRoute: string) => {
             <div class="w-2/5 text-left">
               {{ item.name }}
             </div>
+          </DynamicButton>
+        </li>
+        <li class="absolute bottom-0 w-5/6 ">
+          <DynamicButton variant="transparent" @click="logout">
+            Cerrar Sesion
           </DynamicButton>
         </li>
       </ul>

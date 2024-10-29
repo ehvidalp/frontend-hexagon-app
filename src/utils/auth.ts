@@ -8,12 +8,12 @@ export function checkAuth(
   const userStore = useUserStore()
 
   if (to.meta.requiresAuth && !userStore.isAuthenticated) {
-    next({ name: 'login', query: { redirect: to.fullPath } })
+    next({ name: 'login' })
     return
   }
 
   if (to.meta.requiresGuest && userStore.isAuthenticated) {
-    next({ name: 'dashboard-home' })
+    next({ name: 'dashboard-accounts' })
     return
   }
   next()

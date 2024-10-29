@@ -7,7 +7,6 @@ export const useUserStore = defineStore('user', () => {
   const token = ref<string | null>(localStorage.getItem('token'))
   const user: Ref<User | null> = ref(null)
 
-  const isAuthenticated = computed(() => !!token.value)
   const isLoggedIn = computed(() => Boolean(user.value))
   const userInformation = computed(() => user.value)
 
@@ -15,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       const { token, user } = await authService.login(userLoginForm)
       setUser(user)
-      localStorage.setItem('token', token)
+      setToken(token)
     } catch (error) {
       console.error('Error during login:', error)
       throw error
@@ -23,8 +22,14 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const setUser = (userData: User) => (user.value = userData)
-
-  const clearUser = () => (user.value = null)
+  const setToken = (tokenValue: string) => {
+    token.value = tokenValue
+    localStorage.setItem('token', tokenValue)
+  }
+  const clearUser = () => {
+    user.value = null
+    localStorage.removeItem('token')
+  }
 
   return {
     user,
@@ -32,7 +37,7 @@ export const useUserStore = defineStore('user', () => {
     setUser,
     clearUser,
     login,
-    isAuthenticated,
+    isAuthenticated: computed(() => !!token.value),
     userInformation,
   }
 })
